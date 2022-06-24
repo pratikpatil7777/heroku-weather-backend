@@ -12,9 +12,16 @@ app.get("/", cors(), async (req, res) => {
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ac7162a5301f68933e690486b0461860`,
     function (error, response, body) {
       let data = JSON.parse(body);
-      console.log(data);
-      if (response.statusCode === 200) {
-        res.send(data);
+
+      try {
+        if (response.statusCode === 200) {
+          res.send(data);
+        } else {
+          console.log(response.statusCode);
+        }
+      } catch (e) {
+        console.log(e, "aaaaaaaaaaaaaaaaaaaa");
+        response.send(e.message);
       }
     }
   );
