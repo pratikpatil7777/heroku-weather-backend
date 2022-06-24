@@ -12,11 +12,9 @@ app.get("/", cors(), async (req, res) => {
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ac7162a5301f68933e690486b0461860`,
     function (error, response, body) {
       let data = JSON.parse(body);
-      console.log(data.weather[0].description);
+      console.log(data);
       if (response.statusCode === 200) {
-        res.send(
-          `The weather in your city "${city}" is ${data.weather[0].description}`
-        );
+        res.send(data);
       }
     }
   );
@@ -30,6 +28,7 @@ app.post("/city", cors(), async (req, res) => {
     `https://api.openweathermap.org/data/2.5/weather?q=${city["location"]}&units=imperial&appid=ac7162a5301f68933e690486b0461860`,
     function (error, response, body) {
       let data = JSON.parse(body);
+      console.log(data);
       if (response.statusCode === 200) {
         res.send(
           data
